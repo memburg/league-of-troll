@@ -1,46 +1,28 @@
 ---
 import Splash from "../components/Splash.astro";
-import Title from "../components/Title.astro";
+import Name from "../components/Name.astro";
 import Layout from "../layouts/Layout.astro";
-
-let champion: string = "";
+import Title from "../components/Title.astro";
 ---
 
 <Layout>
+	<Name />
 	<Title />
 	<Splash />
 </Layout>
 
 <script is:inline>
 	(async () => {
-		const championsResponse = await fetch(
-			"http://ddragon.leagueoflegends.com/cdn/12.20.1/data/en_US/champion.json"
-		);
-		const championsData = (await championsResponse.json()).data;
-		const champions = [];
-		const printjson = {};
+		const championsRequest = await fetch("./database/champions.json");
+		const championsData = await championsRequest.json();
 
-		for (const champion in championsData) {
-			champions.push(champion);
-			printjson[champion] = 'something';
-		}
+		// Select a random champion from DB
+		const champion =
+			championsData[(championsData.length * Math.random()) | 0];
 
-		console.log(JSON.stringify(printjson));
-
-		// Get a random champion
-		const champion = champions[(champions.length * Math.random()) | 0];
-
-		const championResponse = await fetch(
-			`http://ddragon.leagueoflegends.com/cdn/12.20.1/data/en_US/champion/${champion}.json`
-		);
-		const championData = await championResponse.json();
-
-		// Set HTML components
-		document.getElementById(
-			"splash"
-		).src = `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_0.jpg`;
-
-		document.getElementById("title").innerText =
-			championData.data[champion].name;
+		// Populate info in HTML elements
+		document.querySelector("#splash").src = champion.splash;
+		document.querySelector("#name").innerHTML = champion.name;
+		document.querySelector("#title").innerHTML = champion.title;
 	})();
 </script>
