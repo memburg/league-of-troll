@@ -18,10 +18,14 @@ let champion: string = "";
 		);
 		const championsData = (await championsResponse.json()).data;
 		const champions = [];
+		const printjson = {};
 
 		for (const champion in championsData) {
 			champions.push(champion);
+			printjson[champion] = 'something';
 		}
+
+		console.log(JSON.stringify(printjson));
 
 		// Get a random champion
 		const champion = champions[(champions.length * Math.random()) | 0];
