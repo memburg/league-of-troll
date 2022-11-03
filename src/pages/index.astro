@@ -2,13 +2,21 @@
 import Splash from "../components/Splash.astro";
 import Name from "../components/Name.astro";
 import Layout from "../layouts/Layout.astro";
-import Title from "../components/Title.astro";
 ---
 
 <Layout>
-	<Name />
-	<Title />
-	<Splash />
+	<div class="container">
+		<div class="row">
+			<div class="column column-50">
+				<Name />
+				<Splash />
+			</div>
+
+			<div class="column column-50">
+				<p>Items</p>
+			</div>
+		</div>
+	</div>
 </Layout>
 
 <script is:inline>
@@ -22,7 +30,7 @@ import Title from "../components/Title.astro";
 
 		// Populate info in HTML elements
 		document.querySelector("#splash").src = champion.splash;
-		document.querySelector("#name").innerHTML = champion.name;
-		document.querySelector("#title").innerHTML = champion.title;
+		document.querySelector("#name").innerHTML = champion.name + document.querySelector("#name").innerHTML;
+		document.querySelector("#title").innerText = champion.title;
 	})();
 </script>
