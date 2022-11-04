@@ -5,19 +5,24 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<div class="container">
-		<div class="row">
-			<div class="column column-50">
-				<Name />
-				<Splash />
-			</div>
+	<div class="left-container">
+		<Name />
+		<Splash />
+	</div>
 
-			<div class="column column-50">
-				<p>Items</p>
-			</div>
-		</div>
+	<div class="right-container">
+		<p>Items</p>
 	</div>
 </Layout>
+
+<style>
+	.left-container,
+	.right-container {
+		align-self: center;
+		justify-self: center;
+		width: 100%;
+	}
+</style>
 
 <script is:inline>
 	(async () => {
@@ -25,8 +30,7 @@ import Layout from "../layouts/Layout.astro";
 		const championsData = await championsRequest.json();
 
 		// Select a random champion from DB
-		const champion =
-			championsData[(championsData.length * Math.random()) | 0];
+		const champion = championsData[(championsData.length * Math.random()) | 0];
 
 		// Populate info in HTML elements
 		document.querySelector("#splash").src = champion.splash;
