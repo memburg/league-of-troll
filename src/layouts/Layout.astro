@@ -14,24 +14,22 @@
 				margin: 0;
 				padding: 0;
 			}
+
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+			}
+
+			body {
+				max-width: 1280px;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 30px;
+				position: relative;
+				margin-left: auto;
+				margin-right: auto;
+			}
 		</style>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		height: 100%;
-		width: 100%;
-	}
-
-	body {
-		max-width: 1280px;
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 30px;
-		position: relative;
-		margin-left: auto;
-		margin-right: auto;
-	}
-</style>
